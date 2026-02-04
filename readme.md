@@ -1,0 +1,119 @@
+# Virtual Dom
+- The Virtual DOM (VDOM) is a lightweight copy of the real DOM kept in memory.
+- It’s a JavaScript object representation of the UI.
+- React converts JSX into JavaScript objects called the Virtual DOM.
+
+## Representation
+
+```javaScript 
+const vDom = {
+  type: 'div',
+  props: {
+    children: [
+      {
+        type: 'h1',
+        props: {
+          children: 'Hello React!'
+        }
+      },
+      {
+        type: 'button',
+        props: {
+          children: 'Click me'
+        }
+      }
+    ]
+  }
+};
+```
+
+# How Virtual Dom Work 
+
+## 1️⃣ First Time React App Runs (Initial Render)
+
+1. React Component is Written
+
+### Example:
+```javaScript
+function App() {
+  return <h1>Hello React!</h1>;
+}
+```
+
+2. JSX Conversion
+React converts JSX into JavaScript objects called the Virtual DOM.
+
+### Example:
+```javaScript
+{ type: 'h1', props: { children: 'Hello React!' } }
+```
+
+3. Render Virtual DOM to Real DOM
+React takes the Virtual DOM and creates actual HTML elements in the browser.
+
+- Browser shows: Hello React!
+
+# 2️⃣ When App Updates Later (State/Props Change)
+
+1. State or Props Change
+Example: Clicking a button updates a counter.
+```jsx
+const [count, setCount] = React.useState(0);
+```
+
+2. React Creates New Virtual DOM
+- React generates a new Virtual DOM with the updated data.
+
+3. Diffing (Compare Old & New Virtual DOM)
+- React checks what has changed in the new Virtual DOM compared to the old one.
+
+4. Reconciliation
+- Only the changed parts are updated in the real DOM.
+- Unchanged parts are left as-is for efficiency.
+
+5. UI Updates in Browser
+- User sees the changes instantly without the whole page reloading.
+
+
+## Summary (Flow)
+First Load:
+```jsx
+JSX -> Virtual DOM -> Real DOM -> UI shown
+```
+
+## Later Updates:
+```
+   State/Props change -> New Virtual DOM -> Diffing -> Update changed parts in Real DOM -> UI updated
+```
+
+# 3. Lists & Keys
+- This is how React efficiently renders multiple items.
+- Rendering a list.
+
+```jsx
+function App() {
+  const fruits = ["Apple", "Banana", "Orange"];
+
+  return (
+    <ul>
+      {fruits.map((fruit) => (
+        <li>{fruit}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+# What is a key?
+- A key is a unique identifier React uses to track list items when updating UI.
+
+### Correct version..
+
+```jsx
+{fruits.map((fruit, index) => (
+  <li key={index}>{fruit}</li>
+))}
+```
+
+# Context Api
+- Context API is a React feature used for global data sharing, and useContext is the hook that consumes it.
