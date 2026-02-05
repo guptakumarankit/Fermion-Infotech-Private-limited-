@@ -117,3 +117,23 @@ function App() {
 
 # Context Api
 - Context API is a React feature used for global data sharing, and useContext is the hook that consumes it.
+
+# Props Rule 
+- Props are passed with a name → accessed with the same name unless you explicitly rename them while destructuring.
+
+- access with different name 
+```jsx
+// Parent
+<Profile name="Alex" />
+
+// Child
+function Profile({ name: userName }) {
+  return <p>{userName}</p>;
+}
+```
+
+# memo 
+- Memorization  the components 
+
+# UseMemo 
+- Memorization the function return values 
