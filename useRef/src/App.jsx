@@ -71,17 +71,22 @@ import React, { useRef } from 'react'
 
 const App = () => {
   const timerRef = useRef(0);
+  // const displayRef = useRef(1);
 
-  console.log(timerRef)
+  console.log(timerRef)  
   const increseTimer = () => {
-      console.log("Increase");
-      timerRef.current = timerRef.current + 1;
+      // console.log("Increase");
+      timerRef.current.value = timerRef.current.value ? timerRef.current.value + 1 : 1;
+      timerRef.current.style.color = 'green';
+      // displayRef.current.textContent = timerRef.current;
       console.log(timerRef.current)
+      // console.log(displayRef.current)
   }
 
   return (
     <div>
-      <button className='border p-2' onClick={increseTimer} ref={timerRef}>0</button>
+      <input ref={timerRef} type="number" style={{color:"red"}} value={1} readOnly />
+      <button onClick={increseTimer} className='border p-2' >add</button>
     </div>
   )
 }

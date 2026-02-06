@@ -140,3 +140,6 @@ function Profile({ name: userName }) {
 
 # UseCallBack
 - Memorization the function 
+
+# useReducer 
+- It is use to basically state Management..
