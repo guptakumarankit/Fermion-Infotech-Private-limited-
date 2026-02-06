@@ -6,7 +6,10 @@ const Child = ({counttwo , setCountTwo , fun}) => {
   return (
     <>
       <p>Child</p>
-      <button className='border' onClick={() => {setCountTwo(counttwo + 1) , fun()}}>{`countTwo: ${counttwo}`}</button>
+      <div className='flex gap-3'>
+         <button className='border' onClick={fun}>CallBack</button>
+      <button className='border' onClick={() => setCountTwo(counttwo + 1)}>{`countTwo: ${counttwo}`}</button>
+      </div>
     </>
   )
 }
