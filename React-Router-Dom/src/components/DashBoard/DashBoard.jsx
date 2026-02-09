@@ -17,7 +17,7 @@ const DashBoard = () => {
         </Link>
       </nav>
 
-      {/* show children here  */}
+      {/* Outlet is use to show children here... */}
       <Outlet />
     </div>
   );

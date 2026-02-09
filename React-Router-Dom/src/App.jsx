@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Link, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
-import Contant from "./components/pages/Contant";
+import Contact from "./components/pages/Contact";
 import About from "./components/pages/About";
 import User from "./components/pages/User";
 import DashBoard from "./components/DashBoard/DashBoard";
@@ -12,7 +12,7 @@ import DashBoardHomePage from "./components/DashBoard/DashBoardHomePage";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="h-screen w-scrren text-white bg-black">
+      <div className="h-screen overflow-hidden w-[100%] text-white bg-black">
         <nav className="flex justify-evenly bg-red-200 p-3 text-red-800">
           <h1>NavBar</h1>
           <div className="flex gap-5">
@@ -27,10 +27,11 @@ const App = () => {
         <Routes className="bg-red-400">
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="contact" element={<Contant />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="user/:id" element={<User />} />
 
           <Route path="/dashboard" element={<DashBoard />}>
+            {/* index is used to show default page here default page is DashBoardHomePage */}
             <Route index element={<DashBoardHomePage />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
