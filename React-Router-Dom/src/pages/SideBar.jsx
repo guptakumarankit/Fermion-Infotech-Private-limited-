@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Profile from './Profile'
 import Settings from './Settings'
-import HomeLayout from '../Layouts/HomeLayout'
-
+import HomeLayout from './HomeLayout'
 
 const SideBar = () => {
   return (
@@ -12,7 +11,7 @@ const SideBar = () => {
         <Link className="border p-2 rounded" to="profile" element={<Profile />}>
           Profile
         </Link>
-        <Link className="border p-2 rounded" to="settings" element={<Settings  />}>
+        <Link className="border p-2 rounded" to="settings" element={<Settings />}>
           Settings
         </Link>
         <Link className='border p-2 rounded' to="/" element={<HomeLayout/>}>

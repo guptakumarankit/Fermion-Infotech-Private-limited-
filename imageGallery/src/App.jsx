@@ -19,11 +19,11 @@ const App = () => {
   };
 
   const previousImage = () => {
-    setCurrIdx(currIdx == 0 ? 9 : currIdx - 1);
+    setCurrIdx(currIdx === 0 ? pictures.length - 1 : currIdx - 1);
   };
 
   const nextImage = () => {
-    setCurrIdx(currIdx == pictures.length - 1 ? 0 : currIdx + 1);
+    setCurrIdx(currIdx === pictures.length - 1 ? 0 : currIdx + 1);
   };
 
   const handleHoverChange = (idx) => {
@@ -48,7 +48,7 @@ const App = () => {
           <div key={idx}>
             <img
               onClick={() => handlePictures(idx)}
-              onMouseLeave={() => handleHoverOut()}
+              onMouseLeave={() => handleHoverOut(null)}
               onMouseEnter={() => handleHoverChange(idx)}
               className={`w-20 h-20 hover:scale-110 hover:border-2  hover:border-red-700 ${currIdx === idx ? "border border-2 border-white scale-110" : ""}`}
               src={item.img}
