@@ -6,7 +6,7 @@ import { ContextProvider } from './ContextApi/AppContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* Get access only limited componenets that access the store value */}
+    {/* Get access only limited components that access the store value */}
     <ContextProvider >
       <App/>
     </ContextProvider>

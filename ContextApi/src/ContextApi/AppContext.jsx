@@ -8,7 +8,7 @@ export const ContextProvider = ({ children }) => {
   console.log(children);
 
   // items store in store
-  const [name, setName] = useState("Ankit");
+  const [name, setName] = useState("name");
   const [count, setCount] = useState(0);
   const increase = () => {
     setCount(count + 1);
