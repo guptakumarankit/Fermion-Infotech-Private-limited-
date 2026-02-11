@@ -3,7 +3,6 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
 
-
 const App = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +19,6 @@ const App = () => {
   const [filterData , setFilterData] = useState(todo);
 
   const nameInputRef = useRef(null);
-
   // console.log(search)
 
   useEffect(() => {
