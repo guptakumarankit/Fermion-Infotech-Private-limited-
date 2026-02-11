@@ -38,7 +38,7 @@ const ShowPictures = () => {
     setShowPicture(
       hoverChangeIdx === null ? pictures[currIdx] : pictures[hoverChangeIdx],
     );
-  }, [currIdx,hoverChangeIdx,pictures]);
+  }, [currIdx, hoverChangeIdx, pictures]);
 
   return (
     <>
