@@ -1,13 +1,13 @@
 import { Routes , Route } from 'react-router-dom'
-import HomeLayout from './pages/HomeLayout'
-import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import User from './pages/User'
-import DashBoardLayout from './pages/DashBoardLayout'
-import DashBoard from './pages/DashBoard'
-import Profile from './pages/Profile'
-import Settings from './pages/Settings'
+import HomeLayout from '../pages/HomeLayout'
+import Home from '../pages/Home'
+import About from '../pages/About'
+import Contact from '../pages/Contact'
+import User from '../pages/User'
+import DashBoardLayout from '../pages/DashBoardLayout'
+import DashBoard from '../pages/DashBoard'
+import Profile from '../pages/Profile'
+import Settings from '../pages/Settings'
 
 const RoutesMain = () => {
   return (

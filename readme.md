@@ -59,7 +59,7 @@ function App() {
 # 2️⃣ When App Updates Later (State/Props Change)
 
 1. State or Props Change
-   Example: Clicking a button updates a counter.
+  Example: Clicking a button updates a counter.
 
 ```jsx
 const [count, setCount] = React.useState(0);
@@ -121,7 +121,7 @@ function App() {
 
 ### Correct version..
 
-```jsx
+```Jsx
 {
   fruits.map((fruit, index) => <li key={index}>{fruit}</li>);
 }
@@ -186,3 +186,42 @@ function Profile({ name: userName }) {
 - React.lazy = load component only when needed.
 - Suspense = wait for lazy component to load.
 - fallback = show this while waiting.
+
+
+# React Redux Toolkit Overview
+
+## 1. What is Redux?
+
+Redux is a state management library for JavaScript apps (commonly React). It helps you **manage global state** — data that multiple components need to access or update.
+
+The basic Redux pattern involves:
+
+- **Store:** Holds the app’s state.
+- **Actions:** Describe “what happened.”
+- **Reducers:** Decide “how the state changes” based on actions.
+
+> Note: Traditional Redux often requires a lot of boilerplate code, such as writing action types, action creators, and switch statements.
+
+---
+
+## 2. Why Redux Toolkit?
+
+Redux Toolkit solves the boilerplate problem and adds best practices by providing **built-in utilities**.
+
+It offers:
+
+- **`configureStore`** → Sets up the Redux store with good defaults.
+- **`createSlice`** → Generates reducers and actions automatically.
+- **`createAsyncThunk`** → Handles async operations like API calls easily.
+- **Immer integration** → Lets you write "mutating" code safely while keeping state immutable under the hood.
+
+---
+
+## 3. Key Benefits
+
+- **Less boilerplate** → simpler, cleaner code.
+- **Built-in best practices** → avoids common Redux mistakes.
+- **Supports async actions easily** with `createAsyncThunk`.
+- **Fully compatible with React** and other libraries.
+- **Widely adopted** in modern React projects.
+

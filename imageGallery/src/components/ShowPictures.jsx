@@ -11,7 +11,6 @@ const ShowPictures = () => {
     setShowPicture,
     hoverChangeIdx,
     setHoverChangesIdx,
-    modelOpen,
   } = useContext(AppContext);
 
   const handlePictures = (idx) => {
@@ -46,7 +45,7 @@ const ShowPictures = () => {
         <div>Image is Not Found</div>
       ) : (
         <>
-          <div className={`flex ${modelOpen ? "-z-1" : ""}`}>
+          <div className="flex">
             {pictures.map((item, idx) => (
               <div key={idx}>
                 <img
@@ -61,7 +60,7 @@ const ShowPictures = () => {
             ))}
           </div>
 
-          <div className={`relative ${modelOpen ? "-z-1" : ""}`}>
+          <div>
             <img src={showPicture} alt="show-picture" className="h-120 w-200" />
             <FaChevronLeft
               onClick={previousImage}

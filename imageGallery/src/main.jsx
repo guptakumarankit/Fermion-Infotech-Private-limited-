@@ -4,10 +4,11 @@ import './index.css'
 import App from './App.jsx'
 import { ContextProvider } from './contextAPi/AppContext.jsx'
 
+
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
+  <StrictMode>
     <ContextProvider>
       <App />
     </ContextProvider>
-  // </StrictMode>,
+  </StrictMode>,
 )

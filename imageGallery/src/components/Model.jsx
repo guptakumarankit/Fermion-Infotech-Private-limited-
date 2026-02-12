@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../contextAPi/AppContext";
 import { RxCross2 } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 const Model = () => {
+  const navigate = useNavigate();
   const [pictureUrl, setPictureUrl] = useState("");
   const {
     currIdx,
     pictures,
     setPictures,
-    modelOpen,
-    setModelOpen,
     editing,
     setEditing,
   } = useContext(AppContext);
@@ -23,7 +23,6 @@ const Model = () => {
       localStorage.setItem("pic", JSON.stringify(newPictures));
       setPictureUrl("");
       setEditing(false);
-      setModelOpen(false);
     } else {
       const newPictures = [...pictures, pictureUrl];
       // console.log("newPic" , newPictures)
@@ -31,20 +30,20 @@ const Model = () => {
       localStorage.setItem("pic", JSON.stringify(newPictures));
       setPictureUrl("");
       // console.log(pictures)
-      setModelOpen(false);
     }
+    navigate("/")
   };
 
   return (
     <div
-      className={`absolute top-[25%] w-[50%] h-[50%] border bg-gray-200 p-3 border rounded ${modelOpen ? "z-3" : "z-[-20]"}`}
+      className={`absolute top-[25%] w-[50%] h-[50%] border bg-gray-200 p-3 border rounded}`}
     >
-      <RxCross2
+      {/* <RxCross2
         onClick={() => {
-          (setModelOpen(false), setEditing(false));
+          (setEditing(false));
         }}
         className="absolute top-2 right-3 text-3xl"
-      />
+      /> */}
       <h1 className="text-center text-xl mt-4">Add New Image</h1>
       <form action={handleSubmit} className="p-10 flex flex-col gap-8">
         <div className="flex flex-col gap-4">

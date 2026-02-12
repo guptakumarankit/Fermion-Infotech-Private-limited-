@@ -42,7 +42,6 @@ const App = () => {
       setFilterData(newTodo);
       setEditingId(null);
       setEditing(false);
-     
     } else {
       const formData = {
         id: Date.now(),
@@ -87,7 +86,7 @@ const App = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 ">
+    <div className="flex flex-col gap-4">
 
       <div className='bg-red-300 w-full h-full flex items-center justify-between p-4'>
         <div className='text-3xl'>TodoList</div>
