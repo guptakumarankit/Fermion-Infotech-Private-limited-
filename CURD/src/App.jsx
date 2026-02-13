@@ -8,22 +8,21 @@ const App = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.operation.todos);
   const [editId, setEditId] = useState(null);
-  const [editing , setEditing] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   const inputRef = useRef(null);
   const [input, setInput] = useState("");
 
   const handleTodo = (e) => {
     e.preventDefault();
-    if(editing){
-      dispatch(EditTodo({id: editId , input : input}))
+    if (editing) {
+      dispatch(EditTodo({ id: editId, input: input }));
       setEditing(false);
       setEditId(null);
-      setInput('')
-    }
-    else{
-        dispatch(AddTodo(input));
-        setInput('');
+      setInput("");
+    } else {
+      dispatch(AddTodo(input));
+      setInput("");
     }
   };
 
@@ -34,13 +33,13 @@ const App = () => {
     // console.log("id" , id);
     setEditId(id);
     setEditing(true);
-  }
+  };
 
   useEffect(() => {
-     if(editing && inputRef.current){
-        inputRef.current.focus();
-     }
-  } , [editing])
+    if (editing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editing]);
 
   return (
     <>

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../contextAPi/AppContext";
-import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 
 const Model = () => {
@@ -38,12 +37,6 @@ const Model = () => {
     <div
       className={`absolute top-[25%] w-[50%] h-[50%] border bg-gray-200 p-3 border rounded}`}
     >
-      {/* <RxCross2
-        onClick={() => {
-          (setEditing(false));
-        }}
-        className="absolute top-2 right-3 text-3xl"
-      /> */}
       <h1 className="text-center text-xl mt-4">Add New Image</h1>
       <form action={handleSubmit} className="p-10 flex flex-col gap-8">
         <div className="flex flex-col gap-4">

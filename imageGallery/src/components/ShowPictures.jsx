@@ -45,9 +45,11 @@ const ShowPictures = () => {
         <div>Image is Not Found</div>
       ) : (
         <>
-          <div className="flex">
-            {pictures.map((item, idx) => (
-              <div key={idx}>
+          <div className="flex w-[60%] overflow-hidden">
+             <div className="flex transition-transform duration-300"
+             style={{transform: `translateX(-${currIdx * 60}px)`}}>
+                 {pictures.map((item, idx) => (
+              <div key={idx} className="flex-shrink-0">
                 <img
                   onClick={() => handlePictures(idx)}
                   onMouseLeave={() => handleHoverOut(null)}
@@ -58,9 +60,10 @@ const ShowPictures = () => {
                 />
               </div>
             ))}
+             </div>
           </div>
 
-          <div>
+          <div className="relative">
             <img src={showPicture} alt="show-picture" className="h-120 w-200" />
             <FaChevronLeft
               onClick={previousImage}
@@ -70,14 +73,17 @@ const ShowPictures = () => {
               onClick={nextImage}
               className="absolute right-[0%] top-[50%] text-white text-6xl hover:text-blue-900"
             />
-            <div className="flex gap-1 absolute bottom-1 left-[40%]">
-              {pictures.map((_, idx) => (
+            <div className="flex w-[20%] right-[20%] gap-1 absolute bottom-1 left-[40%]  overflow-hidden">
+             <div className="flex transition-transform duration-100"
+             style={{transform : `translateX(-${currIdx * 10}px)`}}>
+                  {pictures.map((_, idx) => (
                 <div
                   onClick={() => setCurrIdx(idx)}
                   key={idx}
                   className={`h-4 w-4 rounded-full hover:bg-red-700 border border-white cursor-pointer ${currIdx === idx ? "bg-green-400" : ""}`}
                 ></div>
               ))}
+             </div>
             </div>
           </div>
         </>

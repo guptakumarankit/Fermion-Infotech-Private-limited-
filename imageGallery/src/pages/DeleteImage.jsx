@@ -1,66 +1,61 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../contextAPi/AppContext';
 // import ShowPictures from '../components/ShowPictures'
 
 const DeleteImage = () => {
-  const {pictures , setPictures , setCurrIdx} = useContext(AppContext);
-  const deletePicIdx = new Map();
+  const {pictures , setPictures , currIdx , setCurrIdx} = useContext(AppContext);
+  
+  const [checkedBox , setCheckedBox] = useState({});
+  // console.log(checkedBox);
+
+  const toggleCheckBox = (idx) => {
+     setCheckedBox((prev) => ({
+        ...prev ,
+        [idx] : !prev[idx]
+     }))
+  }
 
   const handleDelete = () => {
-    let newPictures = []; 
-
-    for(const [key , item] of deletePicIdx){
-        newPictures.push(item)
-        console.log(item);
-        deletePicIdx.delete(key)
-    }
-    
-    setCurrIdx(0);
-    console.log("newPictures" , newPictures)
+    // console.log("Delete images")
+    const newPictures = pictures.filter((_,idx) => checkedBox[idx] !== true);
     setPictures(newPictures);
-    localStorage.setItem("pic", JSON.stringify(newPictures));
+    setCurrIdx(0);
+    setCheckedBox({})
+    localStorage.setItem("pic" , JSON.stringify(newPictures));
   }
 
   return (
-     <div>
-       <div className="flex">
+     <div className='flex flex-col gap-7 w-[60%] overflow-hidden'>
+      <div className="flex transition-transform duration-200"
+      style={{transform: `translateX(-${currIdx * 60}px)`}}>
       {
         pictures.map((item , idx) => {
-            const checkedBoxRef = useRef(null);
             return (
-              <div key={idx} className='relative'>
+              <div key={idx} className="flex-shrink-0 relative">
                 <img
                   className={`w-20 h-20`}
                   src={item}
                   alt="Picture"
-                  onClick={() =>{
-                    if(checkedBoxRef.current){
-                        checkedBoxRef.current.checked = !checkedBoxRef.current.checked 
-                        console.log(checkedBoxRef.current.checked)
-                        if(deletePicIdx.has(idx)){
-                          deletePicIdx.delete(idx);
-                        }
-                        else{
-                          deletePicIdx.set(idx , item);
-                        }
-
-                        // console.log("deletePicIdx" , deletePicIdx)
-                    }
-                    else{
-                      console.log("not in")
-                    }
-                  }
-                  }
+                  onClick={() => {
+                    toggleCheckBox(idx);
+                  }}
                 />
                 <input
-                ref={checkedBoxRef}
-                type="checkbox" className='absolute top-[40%] left-[35%] h-[20px] w-[20px] border-none'/>
+                  type="checkbox"
+                  readOnly
+                  checked={checkedBox[idx]}
+                  className={`absolute top-[40%] left-[35%] h-[20px] w-[20px] border-none blur-2xl ${
+                checkedBox[idx] ? "z-50 blur-none" : ""
+              }`}
+                />
               </div>
-            )
+            );
         })
       }      
       </div>
-      <button onClick={handleDelete}>DeleteSelectedImage</button>
+      <div className='flex justify-center align-center'>
+         <button onClick={handleDelete} className='bg-red-500 p-2 rounded rounded-lg '>DeleteSelectedImage</button>
+      </div>
      </div>
   )
 }

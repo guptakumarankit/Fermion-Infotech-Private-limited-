@@ -187,9 +187,7 @@ function Profile({ name: userName }) {
 - Suspense = wait for lazy component to load.
 - fallback = show this while waiting.
 
-
 # React Redux Toolkit Overview
-
 ## 1. What is Redux?
 
 Redux is a state management library for JavaScript apps (commonly React). It helps you **manage global state** — data that multiple components need to access or update.
@@ -225,3 +223,28 @@ It offers:
 - **Fully compatible with React** and other libraries.
 - **Widely adopted** in modern React projects.
 
+# Key Points 
+- ✔ Global state → Separate Redux slice files
+- ✔ Local state → Inside the current component
+
+- That is the proper way to structure apps using Redux Toolkit.
+
+# ✅ Correct Way: Use getState() in Thunks
+If you need one global state inside another (for logic), use a thunk.
+
+
+```jsx
+export const addItemIfLoggedIn = (item) => (dispatch, getState) => {
+  const state = getState();
+  const user = state.auth.user;
+
+  if (user) {
+    dispatch(addItem(item));
+  } else {
+    console.log("User not logged in");
+  }
+};
+```
+
+- getState() gives full global store.
+- state.auth.user accesses another slice.

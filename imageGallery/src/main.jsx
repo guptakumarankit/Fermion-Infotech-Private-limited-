@@ -6,9 +6,9 @@ import { ContextProvider } from './contextAPi/AppContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <ContextProvider>
       <App />
-    </ContextProvider>
-  </StrictMode>,
+    </ContextProvider>,
+  // </StrictMode>,
 )
