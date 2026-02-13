@@ -248,3 +248,79 @@ export const addItemIfLoggedIn = (item) => (dispatch, getState) => {
 
 - getState() gives full global store.
 - state.auth.user accesses another slice.
+
+
+# Custom Hook in React
+
+A **custom hook** in React is a JavaScript function that:
+
+- Starts with the word `use`
+- Uses one or more built-in React hooks (like `useState`, `useEffect`, etc.)
+- Lets you reuse stateful logic across multiple components
+
+It’s simply a way to **extract and share logic between components**.
+
+---
+
+## 🔹 Why Do We Need Custom Hooks?
+
+In React, sometimes multiple components need the same logic (for example: handling forms, fetching data, managing counters).
+
+Instead of copying the same code everywhere, we create a **custom hook** and reuse it.
+
+# Don’t call hooks inside loops, conditions, or nested functions.
+
+# React Folder structure 
+
+```jsx
+
+my-react-app/
+├── public/
+│   └── index.html           # HTML entry point
+├── src/
+│   ├── assets/              # images, fonts, icons
+│   ├── components/          # reusable UI components
+│   │   └── Button.jsx
+│   ├── pages/               # full pages (used with routing)
+│   │   └── Home.jsx
+│   ├── hooks/               # custom React hooks
+│   │   └── useFetch.js
+│   ├── context/             # React Context for global state
+│   │   └── AuthContext.jsx
+│   ├── services/            # API calls / backend integration
+│   │   └── api.js
+│   ├── utils/               # helper functions
+│   │   └── formatDate.js
+│   ├── App.jsx              # main app structure & routes
+│   └── main.jsx             # React app entry point
+├── package.json
+└── README.md
+
+```
+
+# Redux Toolkit 
+
+```jsx
+my-react-app/
+├── public/
+│   └── index.html
+├── src/
+│   ├── assets/           # images, fonts, icons
+│   ├── components/       # reusable UI components
+│   ├── pages/            # page-level components
+│   ├── features/         # Redux feature modules
+│   │   └── counter/
+│   │       ├── Counter.jsx
+│   │       ├── counterSlice.js
+│   │       └── counterAPI.js
+│   ├── app/
+│   │   └── store.js      # Redux store configuration
+│   ├── hooks/            # custom hooks
+│   ├── context/          # optional, for React Context
+│   ├── utils/            # helper functions
+│   ├── App.jsx           # main app layout & routes
+│   └── main.jsx          # app entry point
+├── package.json
+└── README.md
+
+```

@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const loadData = () => {
-    const data = localStorage.getItem("todoList")
-    // console.log(typeof data) // string 
-    // console.log(data == null) // false
-    // console.log(data == undefined) // false
-    // console.log(data == "")  // false
-    // console.log("data" , data)
-    return data ? JSON.parse(data) : [];
-}
+  const data = localStorage.getItem("todoList");
+  // console.log(typeof data) // string
+  // console.log(data == null) // false
+  // console.log(data == undefined) // false
+  // console.log(data == "")  // false
+  // console.log("data" , data)
+  return data ? JSON.parse(data) : [];
+};
 
 const initialState = {
-  todos: loadData()
+  todos: loadData(),
 };
 
 const operationSlice = createSlice({
