@@ -6,7 +6,7 @@ const initialState = {
 }
 
 export const counterSlice = createSlice({
-    name : 'counter',
+    name : 'counter',    // name of the global variable 
     initialState,
     reducers:{
         increment : (state , actions) => {
@@ -27,3 +27,5 @@ export const counterSlice = createSlice({
 
 export const {increment , decrement} = counterSlice.actions;
 export default counterSlice.reducer
+
+// in slice file only write the global variable. 

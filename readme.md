@@ -224,8 +224,8 @@ It offers:
 - **Widely adopted** in modern React projects.
 
 # Key Points 
-- ✔ Global state → Separate Redux slice files
-- ✔ Local state → Inside the current component
+- ✔ Global state → Separate Redux slice files.
+- ✔ Local state → Inside the current component.
 
 - That is the proper way to structure apps using Redux Toolkit.
 
@@ -324,3 +324,6 @@ my-react-app/
 └── README.md
 
 ```
+
+# Form Validation 
+- Form validation is the process of verifying that user-entered data in a web form is accurate, complete, and properly formatted before it is submitted to a server.
