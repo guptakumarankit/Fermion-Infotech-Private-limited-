@@ -59,9 +59,9 @@ const App = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setCurrentPageItem(fetchCurrentData());
-  } , [])
+  // useEffect(() => {
+  //   setCurrentPageItem(fetchCurrentData());
+  // } , [])
 
   useEffect(() => {
     setPage(modifiedArr());
@@ -69,7 +69,7 @@ const App = () => {
   }, [currPage]);
 
   // console.log("texts", texts);
-  console.log(currPageItem);
+  // console.log(currPageItem);
   // console.log("currPage" , currPage)
 
   return (
@@ -121,3 +121,6 @@ const App = () => {
 };
 
 export default App;
+
+// Doubt
+//  by default not set the currPageData .
