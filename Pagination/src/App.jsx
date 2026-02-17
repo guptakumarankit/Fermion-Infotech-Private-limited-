@@ -59,21 +59,19 @@ const App = () => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   setCurrentPageItem(fetchCurrentData());
-  // } , [])
-
   useEffect(() => {
-    setPage(modifiedArr());
-    setCurrentPageItem(fetchCurrentData());
-  }, [currPage]);
+    if(texts){
+      setPage(modifiedArr());
+      setCurrentPageItem(fetchCurrentData());
+    }
+  }, [texts , currPage]);
 
   // console.log("texts", texts);
   // console.log(currPageItem);
   // console.log("currPage" , currPage)
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center">
+    <div className="flex flex-col p-7 gap-8 justify-center items-center">
       <div>
         {currPageItem &&
           currPageItem.map((item) => (
@@ -122,5 +120,3 @@ const App = () => {
 
 export default App;
 
-// Doubt
-//  by default not set the currPageData .

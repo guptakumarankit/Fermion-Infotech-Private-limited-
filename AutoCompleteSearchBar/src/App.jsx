@@ -54,30 +54,32 @@ const App = () => {
     "Kindle Paperwhite",
   ];
 
-  const [search , setSearch] = useState('');
-  const [matchedData , setMatchedData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [matchedData, setMatchedData] = useState([]);
 
   const handleChange = (e) => {
-      const inputValue = e.target.value;
-      console.log(inputValue)
-      setSearch(inputValue);
+    const inputValue = e.target.value;
+    // console.log(inputValue);
+    setSearch(inputValue);
 
-      if(inputValue == ""){
-        inputValue.trim();
-        setMatchedData([])
-        return;
-      }
+    if (inputValue == "") {
+      inputValue.trim();
+      setMatchedData([]);
+      return;
+    }
 
-      const filteredData = products.filter((product) => product.toLowerCase().startsWith(inputValue.toLowerCase()))
-    
-      setMatchedData(filteredData);
-      console.log("filteredData" , filteredData)
-  }
+    const filteredData = products.filter((product) =>
+      product.toLowerCase().startsWith(inputValue.toLowerCase()),
+    );
+
+    setMatchedData(filteredData);
+    // console.log("filteredData", filteredData);
+  };
 
   const handleSave = (item) => {
     setSearch(item);
-    setMatchedData([])
-  }
+    setMatchedData([]);
+  };
 
   return (
     <div className="h-screen w-screen bg-green-100 p-2 flex justify-center items-center">
@@ -86,18 +88,21 @@ const App = () => {
           type="text"
           value={search}
           placeholder="You can Search here..."
-          className="border rounded p-2 w-100"
+          className="border rounded p-2 w-100 mb-1"
           onChange={handleChange}
         />
 
-        <div className="flex flex-col max-h-60 overflow-y-auto">
-          {
-            matchedData.length > 0 && matchedData.map((item , idx) => (
-                <div key={idx} className="border p-2" onClick={() => handleSave(item)}>
-                    {item}
-                </div>
-            ))
-          }
+        <div className="flex flex-col max-h-60 overflow-y-auto gap-1">
+          {matchedData.length > 0 &&
+            matchedData.map((item, idx) => (
+              <div
+                key={idx}
+                className="border rounded p-2"
+                onClick={() => handleSave(item)}
+              >
+                {item}
+              </div>
+            ))}
         </div>
       </div>
     </div>
