@@ -327,3 +327,12 @@ my-react-app/
 
 # Form Validation 
 - Form validation is the process of verifying that user-entered data in a web form is accurate, complete, and properly formatted before it is submitted to a server.
+
+# What is Debouncing?
+
+Debouncing ensures a function only runs after a certain delay once the user stops typing or triggering an event.
+This is especially useful for:
+
+- Search inputs (API calls).
+- Window resize events.
+- Auto-saving forms.

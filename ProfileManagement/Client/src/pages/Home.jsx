@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaIgloo } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,6 +17,16 @@ const Home = () => {
     },
   ]);
 
+  // const fetchProfile = async() => {
+  //   const res = await fetch("http://localhost:6000/profile/fetchProfile");
+  //   const data = await res.json();
+  //   setProfiles(data);
+  // }
+  
+  // useEffect(() => {
+  //   fetchProfile();
+  // } , [])
+  
   const handleDelete = (id) => {
     setProfiles(profiles.filter((p) => p.id !== id));
     toast.success("Profile deleted successfully!");
@@ -25,6 +35,7 @@ const Home = () => {
   const handleEdit = (profile) => {
     toast.info(`Edit profile: ${profile.name}`);
   };
+
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 rounded">
