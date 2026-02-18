@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const products = [
@@ -54,27 +54,35 @@ const App = () => {
     "Kindle Paperwhite",
   ];
 
+  const [debouncedSearch , setDebouncedSearch] = useState("");
   const [search, setSearch] = useState("");
   const [matchedData, setMatchedData] = useState([]);
 
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
-    // console.log(inputValue);
-    setSearch(inputValue);
 
-    if (inputValue == "") {
-      inputValue.trim();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    } , 500)
+
+    return () => clearTimeout(timer);
+  } , [search])
+
+    // console.log(debouncedSearch);
+    
+    useEffect(() =>  {
+
+    if (debouncedSearch.trim() === "") {
       setMatchedData([]);
       return;
     }
 
     const filteredData = products.filter((product) =>
-      product.toLowerCase().startsWith(inputValue.toLowerCase()),
+      product.toLowerCase().startsWith(debouncedSearch.toLowerCase()),
     );
 
     setMatchedData(filteredData);
     // console.log("filteredData", filteredData);
-  };
+  } , [debouncedSearch]);
 
   const handleSave = (item) => {
     setSearch(item);
@@ -89,7 +97,7 @@ const App = () => {
           value={search}
           placeholder="You can Search here..."
           className="border rounded p-2 w-100 mb-1"
-          onChange={handleChange}
+          onChange={(e) => setSearch(e.target.value)}
         />
 
         <div className="flex flex-col max-h-60 overflow-y-auto gap-1">
