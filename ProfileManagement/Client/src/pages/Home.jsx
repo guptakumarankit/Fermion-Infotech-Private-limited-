@@ -1,44 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { FaTrash, FaEdit, FaIgloo } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useContext } from "react";
+import { FaTrash, FaEdit } from "react-icons/fa";
+import { AppContext } from "../context/AppContext";
+import toast , { Toaster } from 'react-hot-toast'
+import useNavigate from 'react-router-dom'
 
 const Home = () => {
+  const navigate = useNavigate()
+  const { profiles } = useContext(AppContext);
 
-  const [profiles, setProfiles] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      location: "New York",
-      task: "Design UI for project",
-      isWorking: true,
-      image: null,
-    },
-  ]);
+  const handleDelete = async({id}) => {
+      try {
+        const response = await fetch("http://localhost/profile/deleteProfile/${id}" , {
+          method : 'DELETE',
+        })
 
-  // const fetchProfile = async() => {
-  //   const res = await fetch("http://localhost:6000/profile/fetchProfile");
-  //   const data = await res.json();
-  //   setProfiles(data);
-  // }
-  
-  // useEffect(() => {
-  //   fetchProfile();
-  // } , [])
-  
-  const handleDelete = (id) => {
-    setProfiles(profiles.filter((p) => p.id !== id));
-    toast.success("Profile deleted successfully!");
-  };
+         toast.success("Delete Data SuccessFully");
+      } catch (error) {
+        toast.error(error.message)
+      }
 
-  const handleEdit = (profile) => {
-    toast.info(`Edit profile: ${profile.name}`);
+  }
+
+  const handleEdit = ({id}) => {
+    // toast.info(`Edit profile: ${profile.name}`);
+    navigate("/addProfile");
   };
 
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 rounded">
+      <Toaster position="top-center"  />
       <h1 className="text-3xl font-bold mb-6 text-center">User Profiles</h1>
 
       <div className="grid gap-6">
@@ -48,7 +39,7 @@ const Home = () => {
 
         {profiles.map((profile) => (
           <div
-            key={profile.id}
+            key={profile_.id}
             className="bg-white flex shadow-md rounded-lg overflow-hidden relative"
           >
             {/* Left Side: Image */}
@@ -73,11 +64,11 @@ const Home = () => {
               <div className="absolute top-2 right-4 flex gap-4">
                 <FaEdit
                   className="text-blue-500 cursor-pointer hover:text-blue-700 text-2xl"
-                  onClick={() => handleEdit(profile)}
+                  onClick={() => handleEdit(profile_.id)}
                 />
                 <FaTrash
                   className="text-red-500 cursor-pointer hover:text-red-700 text-2xl"
-                  onClick={() => handleDelete(profile.id)}
+                  onClick={() => handleDelete(profile_.id)}
                 />
               </div>
 

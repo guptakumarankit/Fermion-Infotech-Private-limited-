@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const App = () => {
   const products = [
@@ -53,41 +53,55 @@ const App = () => {
     "DJI Mini 3 Drone",
     "Kindle Paperwhite",
   ];
-
-  const [debouncedSearch , setDebouncedSearch] = useState("");
+   
   const [search, setSearch] = useState("");
   const [matchedData, setMatchedData] = useState([]);
+  const [highLightIdx , setHighLightIdx] = useState(0);
 
+  const handleChange = (e) => {
+    const inputValue = e.target.value;
+    // console.log(inputValue);
+    setSearch(inputValue);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-    } , 500)
-
-    return () => clearTimeout(timer);
-  } , [search])
-
-    // console.log(debouncedSearch);
-    
-    useEffect(() =>  {
-
-    if (debouncedSearch.trim() === "") {
+    if (inputValue == "") {
+      inputValue.trim();
       setMatchedData([]);
       return;
     }
 
     const filteredData = products.filter((product) =>
-      product.toLowerCase().startsWith(debouncedSearch.toLowerCase()),
+      product.toLowerCase().startsWith(inputValue.toLowerCase()),
     );
 
     setMatchedData(filteredData);
     // console.log("filteredData", filteredData);
-  } , [debouncedSearch]);
+    setHighLightIdx(0);
+  };
 
   const handleSave = (item) => {
     setSearch(item);
     setMatchedData([]);
+    setHighLightIdx(0);
   };
+
+  const handleKeyDown = (e) => {
+      if(matchedData.length < 0) return;
+
+      if(e.key === 'ArrowDown'){
+        setHighLightIdx((prev) => prev < matchedData.length - 1 ? prev + 1 : matchedData.length - 1)
+        setSearch(matchedData[highLightIdx + 1])
+      }
+      else if(e.key === 'ArrowUp'){
+        setHighLightIdx((prev) => prev > 0 ? prev - 1 : 0)
+        setSearch(matchedData[highLightIdx - 1])
+      }
+      else if(e.key === 'Enter'){
+          if(highLightIdx > 0 && highLightIdx < matchedData.length){
+              handleSave(matchedData[highLightIdx])
+              return;
+          }
+      }
+  }
 
   return (
     <div className="h-screen w-screen bg-green-100 p-2 flex justify-center items-center">
@@ -97,7 +111,8 @@ const App = () => {
           value={search}
           placeholder="You can Search here..."
           className="border rounded p-2 w-100 mb-1"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
 
         <div className="flex flex-col max-h-60 overflow-y-auto gap-1">
@@ -105,8 +120,9 @@ const App = () => {
             matchedData.map((item, idx) => (
               <div
                 key={idx}
-                className="border rounded p-2"
-                onClick={() => handleSave(item)}
+                className={`border rounded p-2 ${highLightIdx === idx ? "bg-blue-200" : ""}`}
+                // onClick={() => handleSave(item)}
+                onMouseUp={() => handleSave(item)}
               >
                 {item}
               </div>
