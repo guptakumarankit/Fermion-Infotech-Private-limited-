@@ -335,3 +335,16 @@ This is especially useful for:
 - Search inputs (API calls).
 - Window resize events.
 - Auto-saving forms.
+
+# Optional Chaining (?.)
+
+- Purpose: Safely access properties or methods on objects that might be null or undefined.
+
+- Prevents Errors: Instead of throwing a TypeError, it returns undefined.
+
+```javascript
+user?.name
+user?.address?.city
+arr?.[0]
+user?.greet?.()
+```
