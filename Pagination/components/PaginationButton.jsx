@@ -39,7 +39,6 @@ const PaginationButton = () => {
     return newPages;
   };
 
-  
   useEffect(() => {
     if(totalPages){
       setPage(modifiedArr());

@@ -348,3 +348,92 @@ user?.address?.city
 arr?.[0]
 user?.greet?.()
 ```
+
+# Chunking in css
+## 1️⃣ One global CSS file
+- Simple, but no chunking.
+
+## 2️⃣ CSS per component (recommended for large apps)
+- Better organization + enables chunking.
+
+## 3️⃣ CSS Modules / Styled Components
+- Even more modular and safer (no class name conflicts).
+
+More modular + No class conflicts
+
+```jsx
+📁 Structure
+Home.jsx
+Home.module.css
+
+Home.module.css
+.title {
+  color: blue;
+}
+```
+
+### Home.jsx
+```jsx
+import styles from './Home.module.css';
+
+function Home() {
+  return <h1 className={styles.title}>Home</h1>;
+}
+```
+
+## 🔎 What happens?
+
+React converts class names into something unique like:
+```jsx
+Home_title__x7f3a
+```
+
+So no other component can accidentally override it.
+
+## ✅ Benefits:
+
+- No global class conflicts
+- Supports chunking
+- Cleaner large-scale architecture
+
+
+## 4️⃣ Styled Components (CSS-in-JS)
+- Using the library styled-components:
+
+```jsx
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  color: blue;
+`;
+
+function Home() {
+  return <Title>Home</Title>;
+}
+```
+
+## ✅ Benefits:
+
+- Styles are scoped automatically
+- Dynamic styling with props
+- No separate CSS file
+
+# In Tailwind 
+
+##  During Development
+
+In development mode:
+
+- Tailwind scans your files.
+- It generates CSS only for the classes you use.
+- If you add a new class, it immediately generates that style.
+
+So it’s not executing classes —
+It is generating CSS rules only for used utilities.
+
+## During Production Build 
+
+- Scans all your project files.
+- Finds every class name used.
+- Removes unused utilities.
+- Creates a final optimized CSS file.

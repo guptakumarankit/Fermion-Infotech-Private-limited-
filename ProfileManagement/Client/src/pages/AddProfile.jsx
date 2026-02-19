@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { AppContext } from "../context/AppContext";
 
 const AddProfile = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    location: "",
-    task: "",
-    isWorking: false,
-    image: null,
-  });
+  const { formData, setFormData, editingId, setEditingId, fetchProfile } =
+    useContext(AppContext);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -24,27 +19,55 @@ const AddProfile = () => {
     }
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Form Data:", formData);
     try {
-        const response = await fetch("http://localhost:6000/profile/addProfile" , {
-          method: 'POST',
-          headers: {"Context-Type" : "application/json"},
-          body: JSON.stringify(formData)
-        })
+      if (editingId) {
+        const response = await fetch(
+          `http://localhost:5000/profile/editProfile/${editingId}`,
+          {
+            method: "POST",
+            headers: { "Context-Type": "application/json" },
+            body: JSON.stringify(formData),
+          },
+        );
 
-        if(response){
+        if (!response) {
+          toast.error(error.message);
+        }
+        setEditingId(null);
+        toast.success("Edit data SuccessFully");
+      } else {
+        const response = await fetch(
+          "http://localhost:5000/profile/addProfile",
+          {
+            method: "POST",
+            headers: { "Context-Type": "application/json" },
+            body: JSON.stringify(formData),
+          },
+        );
+
+        if (response) {
           toast.success("Add NewProfile Successfully");
           setTimeout(() => {
-          navigate("/");
-        }, 500);
+            navigate("/");
+          }, 500);
+        } else {
+          toast.error("Something Went Wrong!");
         }
-        else{
-          toast.success("Something Went Wrong!")
-        }
+      }
+      setFormData({
+        name: "",
+        email: "",
+        location: "",
+        task: "",
+        isWorking: false,
+        image: null,
+      });
+      fetchProfile();
     } catch (error) {
-       toast.error(error.message);
+      toast.error(error.message);
     }
   };
 
