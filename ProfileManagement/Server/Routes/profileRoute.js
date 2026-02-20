@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/addProfile", addProfileController);
 router.get("/fetchProfile", fetchAllProfileController);
 router.get("/fetchProfile/:id", fetchProfileSpecificIdController);
-router.delete("/deleteProfile", deleteProfileController);
-router.post("/editProfile", editProfileController);
+router.delete("/deleteProfile/:id", deleteProfileController);
+router.post("/editProfile/:id", editProfileController);
 
 export default router;

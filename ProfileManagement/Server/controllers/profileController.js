@@ -4,6 +4,7 @@ export const addProfileController = async (req, res) => {
   try {
     const { name, email, location, task, isWorking, image } = req.body;
 
+    console.log(name , email , location , task , isWorking , image)
     if (!name || !email || !location || !task || !isWorking || !image) {
       res
         .status(404)
@@ -20,7 +21,6 @@ export const addProfileController = async (req, res) => {
           Success: false,
         });
     }
-
     res
       .status(200)
       .json({ message: "Add Profile Successfully", Success: true });

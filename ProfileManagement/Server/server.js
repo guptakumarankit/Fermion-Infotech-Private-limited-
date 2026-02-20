@@ -10,13 +10,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 connectDB()
-
 app.use(cors({
-    origin:'http://localhost:5173',
+    // origin:'http://localhost:5173',
     credentials : true,
     methods : ['GET' , 'POST' , 'DELETE' , 'PUT' , 'PATCH']
 }))
 
+app.use(express.json());
 app.use("/profile" , profileRoute);
  
 app.listen(PORT , () => {

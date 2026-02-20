@@ -9,7 +9,6 @@ const connectDB = async () => {
         if(!res){
             console.log("MongoDb Connection Problem: Maybe URL is incorrect or not found!")
         }
-
         console.log("DataBase Connect Successfully")
     } catch (error) {
         console.log("DataBase not Connected", error.message)
