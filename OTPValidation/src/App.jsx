@@ -45,6 +45,7 @@ const App = () => {
     const newArr = [...otpArr];
 
     let inValid = false;
+    
     dataPaste.forEach((item, idx) =>
       isNaN(item) ? (inValid = true) : (newArr[idx] = item),
     );

@@ -437,3 +437,18 @@ It is generating CSS rules only for used utilities.
 - Finds every class name used.
 - Removes unused utilities.
 - Creates a final optimized CSS file.
+
+# e.preventDefault()
+- e.preventDefault() stops the default behavior of the browser.
+
+- e.preventDefault() is used to stop the browser's default behavior for an event, allowing us to handle it manually in React.
+
+# ?? Operator 
+- The operator ?? returns the right-hand value only if the left-hand value is null or undefined.
+
+```jSX
+let result = value1 ?? value2;
+```
+
+- If value1 is not null/undefined, result = value1
+- If value1 is null or undefined, result = value2

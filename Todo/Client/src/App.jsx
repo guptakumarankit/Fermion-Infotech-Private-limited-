@@ -13,7 +13,6 @@ const App = () => {
     return savedData ? JSON.parse(savedData) : [];
   });
 
-  const [editing, setEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [search , setSearch] = useState("");
   const [filterData , setFilterData] = useState(todo);
@@ -26,13 +25,13 @@ const App = () => {
   } , [todo]);
 
   useEffect(() => {
-    if(editing && nameInputRef.current){
+    if(editingId && nameInputRef.current){
       nameInputRef.current.focus();
     }
-  }, [editing]);
+  }, [editingId]);
 
   const handleSubmit = (e) => {
-    if (editing) {
+    if (editingId) {
       const newTodo =  todo.map((user) =>
           user.id === editingId
             ? { id: editingId, name: name, email: email , activity : activity}
@@ -41,7 +40,6 @@ const App = () => {
       setTodo(newTodo);
       setFilterData(newTodo);
       setEditingId(null);
-      setEditing(false);
     } else {
       const formData = {
         id: Date.now(),
@@ -53,9 +51,6 @@ const App = () => {
       const newTodo = [...todo, formData];
       setTodo(newTodo);
       setFilterData(newTodo)
-      // setName("");
-      // setEmail("");
-      // setActivity("")
     }
     setName("");
     setEmail("");
@@ -65,35 +60,33 @@ const App = () => {
   const handleDelete = (id) => {
     const newTodo = todo.filter((item) => item.id !== id);
     setTodo(newTodo);
-    setFilterData(newTodo)
+    setFilterData(newTodo);
   };
 
   const handleEdit = (user) => {
     setName(user.name);
     setEmail(user.email);
-    setActivity(user.activity)
-    setEditing(true);
+    setActivity(user.activity);
     setEditingId(user.id);
   };
 
   const handleSearch = () => {
      const data = todo.filter((item) => (
           item.name.toLowerCase().includes(search.toLowerCase()) ||
-          item.email.toLowerCase().includes(search.toLowerCase) 
-     ))
-     setFilterData(data)
-     setSearch("")
+          item.email.toLowerCase().includes(search.toLowerCase())
+     ));
+     setFilterData(data);
+     setSearch("");
   }
 
   return (
     <div className="flex flex-col gap-4">
-
       <div className='bg-red-300 w-full h-full flex items-center justify-between p-4'>
         <div className='text-3xl'>TodoList</div>
         <div className='flex items-center'>
             <input onChange={(e) => setSearch(e.target.value)} 
             type="text"
-            placeholder='You can Search Here...' 
+            placeholder='You can Search here by name or email' 
             className='text-white p-2 border rounded text-xl'
             value={search}/>
             <IoSearchSharp onClick={handleSearch} className='border text-5xl rounded bg-blue-300'/>
@@ -131,7 +124,7 @@ const App = () => {
           required
           className="border rounded p-2"
           />
-          <button className="bg-red-300 rounded p-3 text-xl" type="submit">{`${editing == true ? "Edit" : "Submit"}`}</button>
+          <button className="bg-red-300 rounded p-3 text-xl" type="submit">{`${editingId != null ? "Edit" : "Submit"}`}</button>
         </form>
 
         <div className="max-h-96 overflow-y-auto rounded-lg flex flex-col gap-8">

@@ -79,7 +79,6 @@ const AddProfile = () => {
         className="mt-2 bg-white p-4 rounded-lg shadow-md w-full max-w-md"
       >
         <h2 className="text-2xl font-bold mb-2 text-center">User Form</h2>
-
         {/* Image Upload */}
         <div className="mb-2">
           <label className="block text-gray-700 mb-1">Upload Image</label>
