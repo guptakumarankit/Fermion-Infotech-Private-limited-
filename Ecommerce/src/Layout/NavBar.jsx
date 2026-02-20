@@ -1,17 +1,29 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../ContextApi/AppContext";
 
 const NavBar = () => {
-  const { userLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+  const { userLogin , setUserLogin } = useContext(AppContext);
+  console.log(userLogin)
+
+  const handleLogin = () => {
+    setUserLogin(true);
+    navigate("/login");
+  }
+
+  const handleLogout = () => {
+    setUserLogin(false);
+    navigate("/");
+  }
 
   return (
     <div className="flex justify-between pl-6 pr-6 pt-4 pb-4 bg-red-400">
       <Link to="/">Home</Link>
       <div className="flex gap-4">
         {!userLogin ? 
-        (<Link to="/login">Login</Link>): (
-        <Link to="/logout">Logout</Link>)
+        (<button onClick={handleLogin}>Login</button>): (
+        <button onClick={handleLogout} >Logout</button>)
         }
         <Link to="/signIn">SignIn</Link>
       </div>
