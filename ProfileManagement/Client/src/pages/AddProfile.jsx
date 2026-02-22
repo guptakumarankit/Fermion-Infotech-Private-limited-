@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AppContext } from "../context/AppContext";
+import { profileBaseUrl } from "../../instanceAxios";
 
 const AddProfile = () => {
   const navigate = useNavigate();
@@ -9,11 +10,9 @@ const AddProfile = () => {
     useContext(AppContext);
 
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
+    const { name, value, type, checked, image } = e.target;
     if (type === "checkbox") {
       setFormData({ ...formData, [name]: checked });
-    } else if (type === "file") {
-      setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -21,32 +20,20 @@ const AddProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Form Data:", formData);
     try {
       if (editingId) {
-        const response = await fetch(
-          `http://localhost:5000/profile/editProfile/${editingId}`,
-          {
-            method: "POST",
-            headers: { "Context-Type": "application/json" },
-            body: JSON.stringify(formData),
-          },
-        );
+        console.log("formData" , formData);
+        const response = await profileBaseUrl.put(`/editProfile/${editingId}` , formData);
 
         if (!response) {
-          toast.error(error.message);
+          toast.error("Something Went wrong");
         }
         setEditingId(null);
         toast.success("Edit data SuccessFully");
       } else {
-        const response = await fetch(
-          "http://localhost:5000/profile/addProfile",
-          {
-            method: "POST",
-            headers: { "Context-Type": "application/json" },
-            body: JSON.stringify(formData),
-          },
-        );
+        // console.log(formData);
+
+        const response = await profileBaseUrl.post('/addProfile' , formData);
 
         if (response) {
           toast.success("Add NewProfile Successfully");
@@ -63,9 +50,10 @@ const AddProfile = () => {
         location: "",
         task: "",
         isWorking: false,
-        image: null,
+        image: "",
       });
       fetchProfile();
+      navigate('/');
     } catch (error) {
       toast.error(error.message);
     }
@@ -83,9 +71,9 @@ const AddProfile = () => {
         <div className="mb-2">
           <label className="block text-gray-700 mb-1">Upload Image</label>
           <input
-            type="file"
+            type="text"
             name="image"
-            accept="image/*"
+            value={formData.image}
             onChange={handleChange}
             className="w-full text-gray-700 border rounded p-1"
           />

@@ -4,29 +4,31 @@ export const addProfileController = async (req, res) => {
   try {
     const { name, email, location, task, isWorking, image } = req.body;
 
-    console.log(name , email , location , task , isWorking , image)
-    if (!name || !email || !location || !task || !isWorking || !image) {
-      res
-        .status(404)
+    console.log(isWorking);
+    // console.log(name , email , location , task , isWorking , image)
+    if (!name || !email || !location || !task || !image) {
+      return res
+        .status(400)
         .json({ message: "All Field is required", Success: false });
     }
 
     const newProfile = await Profile.create(req.body);
 
     if (!newProfile) {
-      res
-        .status(404)
+      return res
+        .status(500)
         .json({
           message: "New Profile not created Something went wrong!",
           Success: false,
         });
     }
-    res
-      .status(200)
+
+    return res
+      .status(201)
       .json({ message: "Add Profile Successfully", Success: true });
   } catch (error) {
-    res
-      .status(404)
+    return res
+      .status(500)
       .json({
         message: `Something Went Wrong ${error.message}`,
         Success: false,
@@ -39,16 +41,16 @@ export const fetchAllProfileController = async (req, res) => {
     const profiles = await Profile.find({});
 
     if (!profiles) {
-      res
-        .status(404)
+      return res
+        .status(500)
         .json({ message: "Profiles doesn't found!", success: false });
     }
 
-    res
-      .status(200)
-      .json({ message: "Fetch Profiles Successfully", success: true });
+    return res
+      .status(201)
+      .json({ message: "Fetch Profiles Successfully", success: true , profiles});
   } catch (error) {
-    res.status(404).json({ message: error.message, success: false });
+    return res.status(500).json({ message: error.message, success: false });
   }
 };
 
@@ -58,41 +60,41 @@ export const fetchProfileSpecificIdController = async (req, res) => {
   try {
     const currentProfile = await Profile.findById(id);
     if (!currentProfile) {
-      res
-        .status(404)
+      return res
+        .status(500)
         .json({ message: "currentProfile Doesn't find!", success: false });
     }
-    res
-      .status(200)
-      .json({ message: "currentProfile fetch SuccessFully", success: true });
+
+    return res
+      .status(201)
+      .json({ message: "currentProfile fetch SuccessFully", success: true , currentProfile});
   } catch (error) {
-    res.status(404).json({ message: error.message, success: false });
+    return res.status(500).json({ message: error.message, success: false });
   }
 };
 
 export const deleteProfileController = async (req, res) => {
   try {
     const { id } = req.params;
-
     const deleteProfile = await Profile.findByIdAndDelete(id);
 
     if (!deleteProfile) {
-      res.status(404).json({ message: "Profile doesn't find" });
+      return res.status(500).json({ message: "Profile doesn't find" });
     }
 
-    res.status(200).json({ message: "Delete Profile SuccessFully" });
+    return res.status(201).json({ message: "Delete Profile SuccessFully" });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const editProfileController = async (req, res) => {
   try {
-    const { id } = req.params;
+    const  { id }  = req.params;
     const { name, email, location, task, isWorking, image } = req.body;
 
-    if (!name || !email || !location || !task || !isWorking || !image) {
-      res
+    if (!name || !email || !location || !task || !image) {
+      return res
         .status(404)
         .json({ message: "All Field is required", success: false });
     }
@@ -107,15 +109,15 @@ export const editProfileController = async (req, res) => {
     });
 
     if (!updateProfile) {
-      res
-        .status(404)
+      return res
+        .status(500)
         .json({ message: "Something went wrong ", success: false });
     }
 
-    res
-      .status(200)
+    return res
+      .status(201)
       .json({ message: "Edit Profile Successfully", success: true });
   } catch (error) {
-    re.status(400).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };

@@ -1,51 +1,27 @@
 import { createContext, useEffect, useState } from "react";
+import { profileBaseUrl } from "../../instanceAxios";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [profiles, setProfiles] = useState([
-    {
-        _id: 1,
-        name: "John Doe",
-        email: "john@example.com",
-        location: "New York",
-        task: "Design UI for project",
-        isWorking: true,
-        image: null,
-    },
-    {
-        _id: 2,
-        name: "John Doe",
-        email: "john@example.com",
-        location: "New York",
-        task: "Design UI for project",
-        isWorking: true,
-        image: null,
-    },
   ]);
 
   const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    email: "",
-    location: "",
-    task: "",
-    isWorking: false,
-    image: null,
+      name: "",
+      email: "",
+      location: "",
+      task: "",
+      isWorking: false,
+      image: "",
   });
 
   const [editingId, setEditingId] = useState(null);
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/profile/fetchProfile",
-        {
-          method : 'GET'
-        }
-      );
-      const data = await res.json();
-      setProfiles(data.data);
+      const { data } = await profileBaseUrl('/fetchProfile')
+      setProfiles(data.profiles);
     } catch (error) {
       console.log(error);
     }

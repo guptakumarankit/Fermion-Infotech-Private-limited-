@@ -13,6 +13,6 @@ router.post("/addProfile", addProfileController);
 router.get("/fetchProfile", fetchAllProfileController);
 router.get("/fetchProfile/:id", fetchProfileSpecificIdController);
 router.delete("/deleteProfile/:id", deleteProfileController);
-router.post("/editProfile/:id", editProfileController);
+router.put("/editProfile/:id", editProfileController);
 
 export default router;
